@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,11 +25,14 @@ public class MainActivity extends AppCompatActivity {
         ImageButton goBackward = (ImageButton) findViewById(R.id.ImageButton4);
         directionMessage= (TextView) findViewById(R.id.textView);
 
+        ImageButton goBluetooth = (ImageButton) findViewById(R.id.ImageButton7);
+
+
         rotateRight.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                    directionMessage.setText("Rotating Head Right");
+                    directionMessage.setText("Rotating Head Counter-Clockwise");
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     directionMessage.setText("Done!");;
                 }
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                    directionMessage.setText("Rotating Head Left");
+                    directionMessage.setText("Rotating Head Clockwise");
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     directionMessage.setText("Done!");;
                 }
@@ -92,6 +96,18 @@ public class MainActivity extends AppCompatActivity {
                     directionMessage.setText("Going Backward");
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     directionMessage.setText("Done!");;
+                }
+                return true;
+            }
+        });
+
+        goBluetooth.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    directionMessage.setText("BLE!");
+                    Intent bleIntent = new Intent(MainActivity.this, ConnectBLE.class);
+                    startActivity(bleIntent);
                 }
                 return true;
             }
